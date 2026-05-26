@@ -10,21 +10,25 @@ A self-hosted photo and video management application designed for **Unraid** and
 
 ## ✨ Features
 
-- **Automatic Indexing** — Watches your photo directory and indexes new/changed files in the background
+- **Automatic Indexing** — Parallel multithreaded scan of your photo directory, indexes new/changed files in the background
+- **Quick Reindex** — Skip-hashing scan that picks up only newly added files (seconds instead of hours on large libraries); full reindex still available for metadata refresh
 - **EXIF Metadata Extraction** — Camera, lens, ISO, aperture, shutter speed, GPS coordinates
-- **Reverse Geocoding** — Automatically resolves GPS coordinates to country, city, and location names (via Nominatim) with persistent caching
+- **Reverse Geocoding** — Language-aware resolution of GPS coordinates to country, city, and location names (via Nominatim) with persistent SQLite cache
 - **WebP Thumbnails** — Generates optimized WebP thumbnails for fast grid loading (~30% smaller than JPEG)
-- **Video Support** — Indexes MP4, MOV, AVI, MKV, WebM and more; extracts duration and generates video thumbnails via ffmpeg
+- **Video Support** — Indexes MP4, MOV, AVI, MKV, WebM and more; extracts duration, generates 1-second frame thumbnails via ffmpeg, on-the-fly transcoding for MOV/HEVC, HTTP Range streaming
 - **HEIC/HEIF Support** — Full support for Apple HEIC/HEIF formats with automatic JPEG conversion for browser display
-- **Smart Cleanup** — Finds exact duplicates (by file hash) and similar photos (by perceptual hash / hamming distance)
-- **Map View** — Browse photos by location on an interactive map with server-side clustering for performance
+- **Smart Cleanup** — Finds exact duplicates (by file hash), similar photos (by pHash hamming distance), plus short and oversized videos
+- **Map View** — Browse photos by location on an interactive map with server-side clustering and language-aware location names
+- **Virtual Albums** — Group photos and videos into custom albums without moving files on disk
 - **Statistics Dashboard** — Storage breakdown, camera usage, timeline, and location stats by country/city
 - **Folder Browsing** — Navigate your library by folder structure
 - **Timeline Slider** — Filter photos by date range
 - **Search** — Full-text search across filenames, locations, cameras, and folders
-- **Trash / Recycle Bin** — Soft-delete with configurable auto-purge (default 30 days)
+- **Photo Viewer** — Pinch-to-zoom on mobile, scroll-wheel and double-click zoom on desktop, persistent thumbnail strip, swipe navigation
+- **Settings Hub** — Centralized view for theme, language, reindexing, stats, cleanup and trash
+- **Trash / Recycle Bin** — Soft-delete with auto-purge after 30 days
 - **PWA Support** — Installable as a Progressive Web App with offline thumbnail caching via Service Worker
-- **Mobile Friendly** — Responsive design with bottom navigation and touch-friendly photo viewer
+- **Mobile Friendly** — Responsive minimalist dark theme with bottom navigation and iOS-aware layout
 
 ---
 
@@ -129,7 +133,7 @@ Manual volume mappings (if not using the template):
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-user/imgvault.git
+git clone https://github.com/Tjindarr/ImgVault.git
 cd imgvault
 
 # Build the Docker image
@@ -180,7 +184,8 @@ All endpoints are prefixed with `/api/`.
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `POST` | `/api/index/run` | Trigger a full reindex |
+| `POST` | `/api/index/run` | Trigger a full reindex (re-hashes and re-reads metadata for all files) |
+| `POST` | `/api/index/run?quick=true` | Quick scan — only indexes new files, skips hashing existing ones |
 
 ### Photos
 
@@ -246,12 +251,13 @@ All endpoints are prefixed with `/api/`.
 ### Indexing Pipeline
 
 1. **File Discovery** — Recursively scans `PHOTOS_DIR` for supported media files
-2. **Change Detection** — Compares file hash (size + mtime + first 8KB) against stored hashes; skips unchanged files
-3. **Metadata Extraction** — EXIF data via `exifread` (JPEG/TIFF) or Pillow (HEIC/PNG/WebP)
-4. **Thumbnail Generation** — WebP thumbnails at 400×400 max using Pillow (images) or ffmpeg (videos)
-5. **Perceptual Hashing** — Computes pHash via `imagehash` for content-based similarity detection
-6. **Reverse Geocoding** — GPS coordinates → country/city/location via Nominatim API with SQLite-backed cache (~1km grid)
-7. **Database Upsert** — Stores all metadata in SQLite with WAL mode for concurrent reads
+2. **Change Detection** — Compares file hash (size + mtime + first 8KB) against stored hashes; skips unchanged files. Quick mode skips hashing entirely and only processes paths not yet in the database
+3. **Parallel Processing** — Multithreaded worker pool extracts metadata and generates thumbnails concurrently
+4. **Metadata Extraction** — EXIF data via `exifread` (JPEG/TIFF) or Pillow (HEIC/PNG/WebP)
+5. **Thumbnail Generation** — WebP thumbnails at 400×400 max using Pillow (images) or ffmpeg 1-second frame extraction (videos)
+6. **Perceptual Hashing** — Computes pHash via `imagehash` for content-based similarity detection
+7. **Reverse Geocoding** — GPS coordinates → country/city/location via Nominatim API with SQLite-backed cache (~1km grid)
+8. **Database Upsert** — Stores all metadata in SQLite with WAL mode for concurrent reads
 
 ### Similarity Detection
 
@@ -308,4 +314,4 @@ npx playwright test   # E2E tests (Playwright)
 
 ## 📄 License
 
-This project is private and not licensed for redistribution.
+MIT — see [LICENSE](LICENSE).
