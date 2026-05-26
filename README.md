@@ -89,18 +89,35 @@ volumes:
   imgvault_trash:
 ```
 
-### Unraid
+### Unraid (Community Applications)
 
-Use the following volume mappings in your Unraid Docker template:
+The easiest way to install on Unraid is via the bundled CA template.
+
+1. In Unraid, open the **Apps** tab → **Install from URL** (or paste this template URL into a new container):
+   ```
+   https://raw.githubusercontent.com/Tjindarr/imgvault/main/templates/imgvault.xml
+   ```
+2. Defaults are already set:
+
+   | Field | Value |
+   |---|---|
+   | **Repository** | `ghcr.io/tjindarr/imgvault:latest` |
+   | **WebUI Port** | Host `8180` → Container `8080` |
+   | **Photos** | `/mnt/user/Pictures` → `/data/photos` |
+   | **Appdata** | `/mnt/user/appdata/imgvault/*` → `/data/db,thumbnails,transcoded,converted,trash` |
+
+3. Adjust the **Photos** path to point at your media library, then click **Apply**. The UI is available at `http://<UNRAID_IP>:8180`.
+
+Manual volume mappings (if not using the template):
 
 | Container Path | Host Path | Description |
 |---------------|-----------|-------------|
-| `/data/photos` | `/mnt/user/Onedrive/Bilder` | Source media (read-write) |
-| `/data/db` | `/mnt/user/appdata/snapvault/db` | SQLite database |
-| `/data/thumbnails` | `/mnt/user/appdata/snapvault/thumbs` | Thumbnail cache |
-| `/data/transcoded` | `/mnt/user/appdata/snapvault/transcoded` | Video transcode cache |
-| `/data/converted` | `/mnt/user/appdata/snapvault/converted` | Image conversion cache |
-| `/data/trash` | `/mnt/user/appdata/snapvault/trash` | Recycle bin |
+| `/data/photos` | `/mnt/user/Pictures` | Source media (read-write) |
+| `/data/db` | `/mnt/user/appdata/imgvault/db` | SQLite database |
+| `/data/thumbnails` | `/mnt/user/appdata/imgvault/thumbs` | Thumbnail cache |
+| `/data/transcoded` | `/mnt/user/appdata/imgvault/transcoded` | Video transcode cache |
+| `/data/converted` | `/mnt/user/appdata/imgvault/converted` | Image conversion cache |
+| `/data/trash` | `/mnt/user/appdata/imgvault/trash` | Recycle bin |
 
 **Port:** `8180` → `8080`
 
