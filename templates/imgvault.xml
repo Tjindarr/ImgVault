@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Container version="2">
   <Name>ImgVault</Name>
+  <Author>Tjindarr</Author>
   <Repository>ghcr.io/tjindarr/imgvault:latest</Repository>
   <Registry>https://ghcr.io/tjindarr/imgvault</Registry>
   <Network>bridge</Network>
