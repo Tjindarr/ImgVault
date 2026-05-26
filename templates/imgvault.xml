@@ -10,7 +10,7 @@
   <Support>https://github.com/Tjindarr/ImgVault/issues</Support>
   <Project>https://github.com/Tjindarr/ImgVault</Project>
   <ReadMe>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/README.md</ReadMe>
-  <Overview>Self-hosted photo and video vault. Automatically indexes your media library, extracts EXIF metadata, generates WebP thumbnails, reverse-geocodes GPS coordinates, detects duplicates and similar photos, and serves everything via a fast, modern web UI with map view, timeline, search, albums and trash. Installable as a PWA.</Overview>
+  <Overview>Self-hosted photo and video vault — all-in-one. Everything (FastAPI backend, SQLite database, Nginx, React frontend) runs in a single container. No external database, Redis, or sidecar containers needed; all metadata and thumbnails are stored locally on your Unraid array. Automatically indexes your media library, extracts EXIF metadata, generates WebP thumbnails, reverse-geocodes GPS coordinates, detects duplicates and similar photos, and serves everything via a fast modern web UI with map view, timeline, search, albums and trash. Installable as a PWA on mobile.</Overview>
   <Category>MediaApp:Photos Productivity:</Category>
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/templates/imgvault.xml</TemplateURL>
