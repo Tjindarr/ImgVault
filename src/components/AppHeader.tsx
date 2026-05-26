@@ -166,7 +166,7 @@ export default function AppHeader({ onToggleSidebar, viewMode, onViewModeChange,
         </button>
         <div className="flex items-center gap-2">
           <div className="w-7 h-7 rounded-lg overflow-hidden hidden sm:flex items-center justify-center">
-            <img src="/icon-192.png" alt="ImgVault" className="w-full h-full object-cover scale-110" />
+            <img src="/icon-512.png" alt="ImgVault" className="w-full h-full object-cover scale-110" />
           </div>
           <h1 className="text-sm font-semibold text-foreground tracking-tight hidden sm:block">ImgVault</h1>
         </div>
