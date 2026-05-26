@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>ImgVault</Name>
+  <Repository>ghcr.io/tjindarr/imgvault:latest</Repository>
+  <Registry>https://ghcr.io/tjindarr/imgvault</Registry>
+  <Network>bridge</Network>
+  <MyIP/>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/Tjindarr/imgvault/issues</Support>
+  <Project>https://github.com/Tjindarr/imgvault</Project>
+  <ReadMe>https://raw.githubusercontent.com/Tjindarr/imgvault/main/README.md</ReadMe>
+  <Overview>Self-hosted photo and video vault. Automatically indexes your media library, extracts EXIF metadata, generates WebP thumbnails, reverse-geocodes GPS coordinates, detects duplicates and similar photos, and serves everything via a fast, modern web UI with map view, timeline, search, albums and trash. Installable as a PWA.</Overview>
+  <Category>MediaApp:Photos Productivity:</Category>
+  <WebUI>http://[IP]:[PORT:8080]/</WebUI>
+  <TemplateURL>https://raw.githubusercontent.com/Tjindarr/imgvault/main/templates/imgvault.xml</TemplateURL>
+  <Icon>https://raw.githubusercontent.com/Tjindarr/imgvault/main/icon.png</Icon>
+  <License>MIT</License>
+  <MinVer>6.10</MinVer>
+  <ExtraParams/>
+  <PostArgs/>
+  <CPUset/>
+  <DateInstalled/>
+  <DonateText/>
+  <DonateLink/>
+  <Description>Self-hosted photo and video vault with automatic indexing, EXIF metadata, WebP thumbnails, reverse geocoding, duplicate detection, map view, timeline and trash. PWA installable.</Description>
+  <Networking>
+    <Mode>bridge</Mode>
+    <Publish>
+      <Port>
+        <HostPort>8180</HostPort>
+        <ContainerPort>8080</ContainerPort>
+        <Protocol>tcp</Protocol>
+      </Port>
+    </Publish>
+  </Networking>
+  <Data>
+    <Volume>
+      <HostDir>/mnt/user/Pictures</HostDir>
+      <ContainerDir>/data/photos</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/imgvault/db</HostDir>
+      <ContainerDir>/data/db</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/imgvault/thumbs</HostDir>
+      <ContainerDir>/data/thumbnails</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/imgvault/transcoded</HostDir>
+      <ContainerDir>/data/transcoded</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/imgvault/converted</HostDir>
+      <ContainerDir>/data/converted</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+    <Volume>
+      <HostDir>/mnt/user/appdata/imgvault/trash</HostDir>
+      <ContainerDir>/data/trash</ContainerDir>
+      <Mode>rw</Mode>
+    </Volume>
+  </Data>
+  <Config Name="WebUI Port" Target="8080" Default="8180" Mode="tcp" Description="HTTP port for the ImgVault web UI" Type="Port" Display="always" Required="true" Mask="false">8180</Config>
+  <Config Name="Photos (source)" Target="/data/photos" Default="/mnt/user/Pictures" Mode="rw" Description="Path to your photo and video library (will be indexed)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/Pictures</Config>
+  <Config Name="Database" Target="/data/db" Default="/mnt/user/appdata/imgvault/db" Mode="rw" Description="SQLite database storage" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/imgvault/db</Config>
+  <Config Name="Thumbnails" Target="/data/thumbnails" Default="/mnt/user/appdata/imgvault/thumbs" Mode="rw" Description="WebP thumbnail cache" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/imgvault/thumbs</Config>
+  <Config Name="Transcoded videos" Target="/data/transcoded" Default="/mnt/user/appdata/imgvault/transcoded" Mode="rw" Description="Cache for transcoded videos (MOV/MKV/AVI -> MP4)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/imgvault/transcoded</Config>
+  <Config Name="Converted images" Target="/data/converted" Default="/mnt/user/appdata/imgvault/converted" Mode="rw" Description="Cache for converted images (HEIC/TIFF -> JPEG)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/imgvault/converted</Config>
+  <Config Name="Trash" Target="/data/trash" Default="/mnt/user/appdata/imgvault/trash" Mode="rw" Description="Recycle bin (auto-purged after 30 days)" Type="Path" Display="always" Required="true" Mask="false">/mnt/user/appdata/imgvault/trash</Config>
+</Container>
