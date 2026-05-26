@@ -2,6 +2,10 @@
 
 A self-hosted photo and video management application designed for **Unraid** and Docker environments. ImgVault automatically indexes your media library, extracts metadata, generates thumbnails, and provides a fast, modern web UI for browsing, searching, and organizing your photos and videos.
 
+**All-in-one:** everything (FastAPI backend, SQLite database, Nginx, React frontend) runs inside a single container. No external database, Redis, or sidecar containers required — all metadata and thumbnails are stored locally on your array.
+
+![ImgVault library view](screenshots/imgvault-library.png)
+
 ---
 
 ## ✨ Features
