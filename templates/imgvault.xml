@@ -15,6 +15,7 @@
   <WebUI>http://[IP]:[PORT:8080]/</WebUI>
   <TemplateURL>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/templates/imgvault.xml</TemplateURL>
   <Icon>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/icon.png</Icon>
+  <Screenshot>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/screenshots/imgvault-library.png</Screenshot>
   <License>MIT</License>
   <MinVer>6.10</MinVer>
   <ExtraParams/>
