@@ -95,7 +95,7 @@ The easiest way to install on Unraid is via the bundled CA template.
 
 1. In Unraid, open the **Apps** tab → **Install from URL** (or paste this template URL into a new container):
    ```
-   https://raw.githubusercontent.com/Tjindarr/imgvault/main/templates/imgvault.xml
+   https://raw.githubusercontent.com/Tjindarr/ImgVault/main/templates/imgvault.xml
    ```
 2. Defaults are already set:
 
