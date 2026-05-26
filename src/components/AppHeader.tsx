@@ -1,4 +1,4 @@
-import { Camera, PanelLeft, LayoutGrid, Map, Loader2, Trash2, ImageIcon, Film, Pencil, FolderHeart, Clock, FolderPlus, Settings } from 'lucide-react';
+import { PanelLeft, LayoutGrid, Map, Loader2, Trash2, ImageIcon, Film, Pencil, FolderHeart, Clock, FolderPlus, Settings } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
 import { useEffect, useState, useCallback, useRef } from 'react';
@@ -165,8 +165,8 @@ export default function AppHeader({ onToggleSidebar, viewMode, onViewModeChange,
           <PanelLeft className="h-5 w-5 text-muted-foreground" />
         </button>
         <div className="flex items-center gap-2">
-          <div className="w-7 h-7 rounded-lg bg-primary items-center justify-center hidden sm:flex">
-            <Camera className="h-4 w-4 text-primary-foreground" />
+          <div className="w-7 h-7 rounded-lg bg-primary flex items-center justify-center overflow-hidden hidden sm:flex">
+            <img src="/icon-192.png" alt="ImgVault" className="w-full h-full object-cover" />
           </div>
           <h1 className="text-sm font-semibold text-foreground tracking-tight hidden sm:block">ImgVault</h1>
         </div>
