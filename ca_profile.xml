@@ -1,0 +1,23 @@
+<CommunityApplications>
+  <Profile>
+    ImgVault is a self-hosted photo and video vault that runs everything in a single Docker container — FastAPI backend, SQLite database, Nginx, and React frontend. No external database, Redis, or sidecar containers needed.
+
+    Features:
+    - Automatic library indexing with EXIF metadata extraction
+    - WebP thumbnail generation and video frame thumbnails
+    - Reverse geocoding for GPS-tagged photos with map view
+    - Duplicate and similar-photo detection (pHash)
+    - Virtual albums without moving files
+    - Trash with 30-day auto-purge
+    - Smart cleanup tools for duplicates, short/large videos, and similar photos
+    - Timeline and search
+    - Installable PWA on mobile and desktop
+
+    All metadata, thumbnails, and converted media are stored locally on your Unraid array.
+  </Profile>
+  <Icon>https://raw.githubusercontent.com/Tjindarr/ImgVault/main/icon.png</Icon>
+  <WebPage>https://github.com/Tjindarr/ImgVault</WebPage>
+  <Support>https://github.com/Tjindarr/ImgVault/issues</Support>
+  <DonateText>Support this project</DonateText>
+  <DonateLink>https://github.com/sponsors/Tjindarr</DonateLink>
+</CommunityApplications>
